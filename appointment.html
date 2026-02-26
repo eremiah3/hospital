@@ -131,6 +131,9 @@
         </div>
     </section>
 
+    <!-- Hidden iframe for form submission -->
+    <iframe name="hiddenFrame" style="display:none;"></iframe>
+
     <!-- Success Modal -->
     <div id="successModal">
         <div class="modal-content">
@@ -152,11 +155,11 @@
                         <p>Please fill in the details below. We'll confirm your appointment within 24 hours.</p>
                     </div>
 
-                    <form id="appointmentForm" action="https://submit-form.com/tmu0nAdL8" method="POST">
-                        <!-- Formspark configuration - kept exactly as original -->
+                    <form id="appointmentForm" action="https://submit-form.com/tmu0nAdL8" method="POST" target="hiddenFrame">
+                        <!-- Formspark configuration -->
                         <input type="hidden" name="_email.subject"
                             value="New Appointment Request - T Elshadai Clinic and Maternity">
-                        <input type="hidden" name="_email.from" value="noreply@tolu.elshaddaihealthcare.com">
+                        <input type="hidden" name="_email.from" value="T Elshadai Clinic and Maternity">
                         <input type="hidden" name="_email.replyto" value="email">
                         <input type="hidden" name="_redirect" value="about:blank">
                         <input type="text" name="_gotcha" style="display:none;" />
@@ -428,9 +431,7 @@
     </footer>
 
     <script>
-        // ────────────────────────────────────────
-        // FORM LOGIC ─ only touching form-related code
-        // ────────────────────────────────────────
+        // Multi-step form logic
         let currentStep = 1;
 
         function nextStep(step) {
@@ -503,7 +504,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // min date - kept as is
+            // Set minimum date for appointment
             const dateEl = document.getElementById('appointmentDate');
             if (dateEl) {
                 dateEl.min = new Date().toISOString().split('T')[0];
@@ -511,44 +512,36 @@
 
             const form = document.getElementById('appointmentForm');
             const submitBtn = document.getElementById('submitButton');
+            const iframe = document.querySelector('iframe[name="hiddenFrame"]');
 
-            if (!form || !submitBtn) return;
+            if (!form || !submitBtn || !iframe) return;
 
-            form.addEventListener('submit', async e => {
-                e.preventDefault();
-
+            form.addEventListener('submit', function (e) {
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Submitting...';
 
-                try {
-                    const data = Object.fromEntries(new FormData(form));
+                const onLoadHandler = () => {
+                    // Show success modal when iframe loads (Formspark submission completed)
+                    document.getElementById('successModal').style.display = 'flex';
+                    form.reset();
 
-                    const resp = await fetch('https://submit-form.com/tmu0nAdL8', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
+                    // Reset form to step 1
+                    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+                    document.getElementById('step1').classList.add('active');
+                    document.querySelectorAll('.progress-step').forEach((el, idx) => {
+                        el.classList.toggle('active', idx === 0);
                     });
+                    currentStep = 1;
 
-                    if (resp.ok) {
-                        document.getElementById('successModal').style.display = 'flex';
-                        form.reset();
-                        // reset to step 1
-                        document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-                        document.getElementById('step1').classList.add('active');
-                        document.querySelectorAll('.progress-step').forEach((el, i) => {
-                            el.classList.toggle('active', i === 0);
-                        });
-                        currentStep = 1;
-                    } else {
-                        alert('Submission failed. Please try again or call us.');
-                    }
-                } catch (err) {
-                    alert('Connection problem. Please call 08057427115.');
-                    console.error(err);
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Appointment';
-                }
+                    setTimeout(() => {
+                        submitBtn.textContent = 'Submit Appointment';
+                        submitBtn.disabled = false;
+                    }, 2500);
+
+                    iframe.removeEventListener('load', onLoadHandler);
+                };
+
+                iframe.addEventListener('load', onLoadHandler);
             });
         });
     </script>
