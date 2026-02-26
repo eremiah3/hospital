@@ -8,48 +8,75 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Success modal styles */
+        /* ── Success modal ── */
         #successModal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
             z-index: 9999;
             justify-content: center;
             align-items: center;
         }
-
         #successModal .modal-content {
-            background: white;
+            background: #fff;
             padding: 40px;
             border-radius: 12px;
             text-align: center;
             max-width: 480px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-
-        #successModal h2 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-
+        #successModal h2 { color: #28a745; margin-bottom: 20px; }
         #successModal button {
             padding: 12px 30px;
             background: #28a745;
-            color: white;
+            color: #fff;
             border: none;
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
             margin-top: 20px;
         }
+        #successModal button:hover { background: #218838; }
 
-        #successModal button:hover {
-            background: #218838;
+        /* ── Error highlight ── */
+        .field-error { border-color: #ff6b6b !important; }
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 0.82rem;
+            margin-top: 4px;
+            display: block;
         }
+
+        /* ── Form steps ── */
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+
+        /* ── Progress steps ── */
+        .form-progress {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+        .progress-number {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: #ccc;
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .progress-step.active .progress-number { background: #0077be; }
+        .progress-step span { font-size: 0.8rem; margin-top: 4px; }
+        .progress-line { flex: 1; height: 2px; background: #ccc; }
     </style>
 </head>
 
@@ -61,13 +88,11 @@
             <div class="nav-wrapper">
                 <div class="logo">
                     <img src="../assets/logo.png" alt="T Elshadai Clinic and Maternity Logo"
-                        style="height: 40px; margin-right: 10px;">
+                        style="height:40px;margin-right:10px;">
                     <span>T Elshadai Clinic</span>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html">Home</a></li>
@@ -118,7 +143,7 @@
                     <i class="fab fa-whatsapp"></i>
                     <h3>WhatsApp</h3>
                     <p>08057427115</p>
-                    <a href="https://wa.me/2348057427115?text=Hello%2C%20I%20need%20medical%20aassistance%20from%20T%20Elshadai%20Clinic%20and%20Maternity."
+                    <a href="https://wa.me/2348057427115?text=Hello%2C%20I%20need%20medical%20assistance%20from%20T%20Elshadai%20Clinic%20and%20Maternity."
                         target="_blank" class="btn btn-primary btn-sm">Chat on WhatsApp</a>
                 </div>
                 <div class="method-card">
@@ -131,17 +156,16 @@
         </div>
     </section>
 
-    <!-- Hidden iframe for form submission -->
+    <!-- Hidden iframe for silent form submission -->
     <iframe name="hiddenFrame" style="display:none;"></iframe>
 
     <!-- Success Modal -->
     <div id="successModal">
         <div class="modal-content">
-            <h2>Appointment Request Sent!</h2>
-            <p>Thank you for choosing T Elshadai Clinic.<br>We will review your request and contact you within 24 hours
-                to
-                confirm.</p>
-            <button onclick="document.getElementById('successModal').style.display='none'">Close</button>
+            <h2><i class="fas fa-check-circle" style="margin-right:8px;"></i>Appointment Request Sent!</h2>
+            <p>Thank you for choosing T Elshadai Clinic.<br>
+               We will review your request and contact you within <strong>24 hours</strong> to confirm.</p>
+            <button onclick="closeSuccessModal()">Close</button>
         </div>
     </div>
 
@@ -155,39 +179,69 @@
                         <p>Please fill in the details below. We'll confirm your appointment within 24 hours.</p>
                     </div>
 
-                    <form id="appointmentForm" action="https://submit-form.com/tmu0nAdL8" method="POST" target="hiddenFrame">
-                        <!-- Formspark configuration -->
+                    <!-- Progress indicator (above form) -->
+                    <div class="form-progress">
+                        <div class="progress-step active" id="prog1">
+                            <div class="progress-number">1</div>
+                            <span>Personal Info</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" id="prog2">
+                            <div class="progress-number">2</div>
+                            <span>Appointment</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" id="prog3">
+                            <div class="progress-number">3</div>
+                            <span>Medical Info</span>
+                        </div>
+                    </div>
+
+                    <form id="appointmentForm"
+                          action="https://submit-form.com/tmu0nAdL8"
+                          method="POST"
+                          target="hiddenFrame"
+                          novalidate>
+
+                        <!-- Formspark hidden fields -->
                         <input type="hidden" name="_email.subject"
-                            value="New Appointment Request - T Elshadai Clinic and Maternity">
-                        <input type="hidden" name="_email.from" value="T Elshadai Clinic and Maternity">
+                               value="New Appointment Request - T Elshadai Clinic and Maternity">
+                        <input type="hidden" name="_email.from"
+                               value="noreply@tolu.elshaddaihealthcare.com">
                         <input type="hidden" name="_email.replyto" value="email">
                         <input type="hidden" name="_redirect" value="about:blank">
-                        <input type="text" name="_gotcha" style="display:none;" />
+                        <!-- Honeypot anti-spam -->
+                        <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off">
 
+                        <!-- ── STEP 1: Personal Information ── -->
                         <div class="form-step active" id="step1">
-                            <h3>Personal Information</h3>
+                            <h3> Personal Information</h3>
+
                             <div class="form-group">
                                 <label for="fullName">Full Name *</label>
-                                <input type="text" id="fullName" name="Full Name" required>
+                                <input type="text" id="fullName" name="Full Name" autocomplete="name">
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="email">Email Address *</label>
-                                    <input type="email" id="email" name="Email Address" required>
+                                    <input type="email" id="email" name="Email Address" autocomplete="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number *</label>
-                                    <input type="tel" id="phone" name="Phone Number" required>
+                                    <input type="tel" id="phone" name="Phone Number" autocomplete="tel"
+                                           placeholder="e.g. 08012345678" maxlength="11">
                                 </div>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="age">Age *</label>
-                                    <input type="number" id="age" name="Age" min="0" max="150" required>
+                                    <input type="number" id="age" name="Age" min="0" max="150">
                                 </div>
                                 <div class="form-group">
                                     <label for="gender">Gender *</label>
-                                    <select id="gender" name="Gender" required>
+                                    <select id="gender" name="Gender">
                                         <option value="">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
@@ -195,18 +249,24 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="address">Address *</label>
-                                <textarea id="address" name="Address" rows="2" required></textarea>
+                                <textarea id="address" name="Address" rows="2"></textarea>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
+
+                            <button type="button" class="btn btn-primary" onclick="goToStep(2)">
+                                Next Step <i class="fas fa-arrow-right"></i>
+                            </button>
                         </div>
 
+                        <!-- ── STEP 2: Appointment Details ── -->
                         <div class="form-step" id="step2">
                             <h3>Appointment Details</h3>
+
                             <div class="form-group">
-                                <label for="department">Department/Service *</label>
-                                <select id="department" name="Department" required onchange="updateDoctors()">
+                                <label for="department">Department / Service *</label>
+                                <select id="department" name="Department" onchange="updateDoctors()">
                                     <option value="">Select Department</option>
                                     <option value="Child and Maternal Health">Child and Maternal Health</option>
                                     <option value="Antenatal Care">Antenatal Care</option>
@@ -220,20 +280,22 @@
                                     <option value="Family Planning">Family Planning</option>
                                 </select>
                             </div>
+
                             <div class="form-group">
-                                <label for="doctor">Preferred Doctor *</label>
-                                <select id="doctor" name="Preferred Doctor" required>
-                                    <option value="">Any Available Doctor</option>
+                                <label for="doctor">Preferred Doctor</label>
+                                <select id="doctor" name="Preferred Doctor">
+                                    <option value="Any Available Doctor">Any Available Doctor</option>
                                 </select>
                             </div>
+
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="appointmentDate">Preferred Date *</label>
-                                    <input type="date" id="appointmentDate" name="Preferred Date" required>
+                                    <input type="date" id="appointmentDate" name="Preferred Date">
                                 </div>
                                 <div class="form-group">
                                     <label for="appointmentTime">Preferred Time *</label>
-                                    <select id="appointmentTime" name="Preferred Time" required>
+                                    <select id="appointmentTime" name="Preferred Time">
                                         <option value="">Select Time</option>
                                         <option value="08:00 AM">08:00 AM</option>
                                         <option value="09:00 AM">09:00 AM</option>
@@ -248,9 +310,10 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="visitType">Visit Type *</label>
-                                <select id="visitType" name="Visit Type" required>
+                                <select id="visitType" name="Visit Type">
                                     <option value="">Select Visit Type</option>
                                     <option value="First Time Visit">First Time Visit</option>
                                     <option value="Follow-up Visit">Follow-up Visit</option>
@@ -258,86 +321,83 @@
                                     <option value="Routine Checkup">Routine Checkup</option>
                                 </select>
                             </div>
+
                             <div class="form-buttons">
-                                <button type="button" class="btn btn-outline" onclick="prevStep(1)">Previous</button>
-                                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step</button>
+                                <button type="button" class="btn btn-outline" onclick="goToStep(1)">
+                                    <i class="fas fa-arrow-left"></i> Previous
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="goToStep(3)">
+                                    Next Step <i class="fas fa-arrow-right"></i>
+                                </button>
                             </div>
                         </div>
 
+                        <!-- ── STEP 3: Medical Information ── -->
                         <div class="form-step" id="step3">
                             <h3>Medical Information</h3>
+
                             <div class="form-group">
                                 <label for="reasonVisit">Reason for Visit *</label>
-                                <textarea id="reasonVisit" name="Reason for Visit" rows="3" required
+                                <textarea id="reasonVisit" name="Reason for Visit" rows="3"
                                     placeholder="Please describe your symptoms or reason for consultation"></textarea>
                             </div>
+
                             <div class="form-group">
                                 <label for="medicalHistory">Medical History</label>
                                 <textarea id="medicalHistory" name="Medical History" rows="3"
                                     placeholder="Any chronic conditions, previous surgeries, or ongoing treatments"></textarea>
                             </div>
+
                             <div class="form-group">
                                 <label for="medications">Current Medications</label>
                                 <textarea id="medications" name="Current Medications" rows="2"
-                                    placeholder="List any medications you're currently taking"></textarea>
+                                    placeholder="List any medications you are currently taking"></textarea>
                             </div>
+
                             <div class="form-group">
                                 <label for="allergies">Allergies</label>
                                 <input type="text" id="allergies" name="Allergies"
                                     placeholder="Any drug or food allergies">
                             </div>
+
                             <div class="form-group">
                                 <label for="insurance">Insurance Provider (if applicable)</label>
                                 <input type="text" id="insurance" name="Insurance Provider"
                                     placeholder="Your insurance company name">
                             </div>
+
                             <div class="form-group checkbox-group">
-                                <input type="checkbox" id="terms" name="Terms Accepted" value="Yes" required>
+                                <input type="checkbox" id="terms" name="Terms Accepted" value="Yes">
                                 <label for="terms">I agree to the hospital's terms and conditions and consent to the
                                     collection of my medical information *</label>
                             </div>
+
                             <div class="form-buttons">
-                                <button type="button" class="btn btn-outline" onclick="prevStep(2)">Previous</button>
-                                <button type="submit" class="btn btn-primary" id="submitButton">Submit
-                                    Appointment</button>
+                                <button type="button" class="btn btn-outline" onclick="goToStep(2)">
+                                    <i class="fas fa-arrow-left"></i> Previous
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">
+                                    <i class="fas fa-paper-plane"></i> Submit Appointment
+                                </button>
                             </div>
                         </div>
+
                     </form>
+                </div><!-- /.form-side -->
 
-                    <div class="form-progress">
-                        <div class="progress-step active" data-step="1">
-                            <div class="progress-number">1</div>
-                            <span>Personal Info</span>
-                        </div>
-                        <div class="progress-line"></div>
-                        <div class="progress-step" data-step="2">
-                            <div class="progress-number">2</div>
-                            <span>Appointment</span>
-                        </div>
-                        <div class="progress-line"></div>
-                        <div class="progress-step" data-step="3">
-                            <div class="progress-number">3</div>
-                            <span>Medical Info</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Info side -->
+                <!-- Info Side -->
                 <div class="info-side">
-                    <div class="info-card" style="margin-top: 30px;">
+                    <div class="info-card" style="margin-top:30px;">
                         <h3>Important Information</h3>
                         <ul class="info-list">
-                            <li><i class="fas fa-check-circle"></i> Please arrive 15 minutes before your appointment
-                            </li>
-                            <li><i class="fas fa-check-circle"></i> Bring your ID card and insurance card (if
-                                applicable)</li>
-                            <li><i class="fas fa-check-circle"></i> Bring any previous medical records or test results
-                            </li>
+                            <li><i class="fas fa-check-circle"></i> Please arrive 15 minutes before your appointment</li>
+                            <li><i class="fas fa-check-circle"></i> Bring your ID card and insurance card (if applicable)</li>
+                            <li><i class="fas fa-check-circle"></i> Bring any previous medical records or test results</li>
                             <li><i class="fas fa-check-circle"></i> We'll confirm your appointment within 24 hours</li>
-                            <li><i class="fas fa-check-circle"></i> Cancellations should be made 24 hours in advance
-                            </li>
+                            <li><i class="fas fa-check-circle"></i> Cancellations should be made 24 hours in advance</li>
                         </ul>
                     </div>
+
                     <div class="info-card">
                         <h3>Need Immediate Care?</h3>
                         <p>If you're experiencing a medical emergency, please don't wait for an appointment.</p>
@@ -346,35 +406,36 @@
                         </a>
                     </div>
 
-                </div>
-                <div class="info-card">
-                    <h3>Contact Appointments Desk</h3>
-                    <div class="contact-options">
-                        <a href="tel:08057427115" class="contact-option">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <strong>Call</strong>
-                                <span>08057427115, 08034269377</span>
-                            </div>
-                        </a>
-                        <a href="https://wa.me/2348057427115" class="contact-option" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            <div>
-                                <strong>WhatsApp</strong>
-                                <span>08057427115</span>
-                            </div>
-                        </a>
+                    <div class="info-card">
+                        <h3>Contact Appointments Desk</h3>
+                        <div class="contact-options">
+                            <a href="tel:08057427115" class="contact-option">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Call</strong>
+                                    <span>08057427115, 08034269377</span>
+                                </div>
+                            </a>
+                            <a href="https://wa.me/2348057427115" class="contact-option" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>
+                                    <strong>WhatsApp</strong>
+                                    <span>08057427115</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-            <div class="info-card">
-                <h3>Available Hours</h3>
-                <div class="hours-simple">
-                    <p><strong>Available 24/7</strong></p>
-                    <p>We are always here for you, round the clock.</p>
-                </div>
-            </div>
+                    <div class="info-card">
+                        <h3>Available Hours</h3>
+                        <div class="hours-simple">
+                            <p><strong>Available 24/7</strong></p>
+                            <p>We are always here for you, round the clock.</p>
+                        </div>
+                    </div>
+                </div><!-- /.info-side -->
+
+            </div><!-- /.appointment-layout -->
         </div>
     </section>
 
@@ -384,8 +445,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>T Elshadai Clinic and Maternity</h3>
-                    <p>Providing quality healthcare services since 2015. Your health and wellbeing are our top
-                        priorities.</p>
+                    <p>Providing quality healthcare services since 2015. Your health and wellbeing are our top priorities.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -416,8 +476,7 @@
                 <div class="footer-col">
                     <h4>Contact Info</h4>
                     <ul class="contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> 148, Orimerunmu Road, Lulak Junction, Papa Jabutu,
-                            Obafemi-Owode LGA, Ogun State</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 148, Orimerunmu Road, Lulak Junction, Papa Jabutu, Obafemi-Owode LGA, Ogun State</li>
                         <li><i class="fas fa-phone"></i> 08057427115, 08034269377</li>
                         <li><i class="fab fa-whatsapp"></i> 08057427115</li>
                         <li><i class="fas fa-clock"></i> Available 24/7</li>
@@ -425,126 +484,201 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 T Elshadai Clinic and Maternity. All rights reserved.</p>
+                <p>&copy; 2024 T Elshadai Clinic and Maternity. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="js/script.js"></script>
     <script>
-        // Multi-step form logic
-        let currentStep = 1;
+    // =========================================================
+    // STEP DEFINITIONS
+    // Each step lists the IDs that MUST have a non-empty value.
+    // For checkboxes, use a leading "#" to indicate checkbox check.
+    // =========================================================
+    const STEP_REQUIRED = {
+        1: ['fullName', 'email', 'phone', 'age', 'gender', 'address'],
+        2: ['department', 'appointmentDate', 'appointmentTime', 'visitType'],
+        3: ['reasonVisit', '#terms']
+    };
 
-        function nextStep(step) {
-            const current = document.getElementById('step' + currentStep);
-            const requiredFields = current.querySelectorAll('[required]');
-            let valid = true;
+    let currentStep = 1;
 
-            requiredFields.forEach(field => {
-                if (field.type === 'checkbox') {
-                    if (!field.checked) valid = false;
-                } else if (!field.value.trim()) {
+    // ── Clear previous error markers ──────────────────────────
+    function clearErrors() {
+        document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+        document.querySelectorAll('.error-msg').forEach(el => el.remove());
+    }
+
+    // ── Validate a single step; returns true if valid ─────────
+    function validateStep(step) {
+        clearErrors();
+        const fields = STEP_REQUIRED[step] || [];
+        let valid = true;
+
+        fields.forEach(id => {
+            if (id.startsWith('#')) {
+                // Checkbox
+            const cbId = id.slice(1);
+                const cb = document.getElementById(cbId);
+                if (cb && !cb.checked) {
                     valid = false;
+                    showError(cb, 'You must accept the terms and conditions.');
                 }
-            });
+            } else {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const val = el.value.trim();
 
-            if (!valid) {
-                alert("Please complete all required fields before continuing.");
+                if (!val) {
+                    valid = false;
+                    showError(el, 'This field is required.');
+                } else if (id === 'email' && !isValidEmail(val)) {
+                    valid = false;
+                    showError(el, 'Please enter a valid email address.');
+                } else if (id === 'phone' && !isValidPhone(val)) {
+                    valid = false;
+                    showError(el, 'Enter a valid Nigerian phone number (e.g. 08012345678).');
+                }
+            }
+        });
+
+        return valid;
+    }
+
+    // ── Attach error message below a field ────────────────────
+    function showError(el, msg) {
+        el.classList.add('field-error');
+        const span = document.createElement('span');
+        span.className = 'error-msg';
+        span.textContent = msg;
+        el.parentNode.appendChild(span);
+    }
+
+    function isValidEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    function isValidPhone(v) {
+        // Nigerian: 11 digits starting with 0, or international +234...
+        return /^(0\d{10}|\+?234\d{10})$/.test(v.replace(/\s/g, ''));
+    }
+
+    // ── Navigate between steps ────────────────────────────────
+    function goToStep(targetStep) {
+        // Validate current step when moving forward
+        if (targetStep > currentStep && !validateStep(currentStep)) {
+            // Scroll to first error
+            const firstErr = document.querySelector('#step' + currentStep + ' .field-error');
+            if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        clearErrors();
+
+        // Hide all steps
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+        // Show target step
+        document.getElementById('step' + targetStep).classList.add('active');
+
+        // Update progress indicators
+        for (let i = 1; i <= 3; i++) {
+            const prog = document.getElementById('prog' + i);
+            if (prog) {
+                if (i <= targetStep) prog.classList.add('active');
+                else prog.classList.remove('active');
+            }
+        }
+
+        currentStep = targetStep;
+
+        // Scroll to form top
+        const formSection = document.querySelector('.appointment-form-section');
+        if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── Update doctor options based on selected department ────
+    function updateDoctors() {
+        const dept = document.getElementById('department').value;
+        const sel = document.getElementById('doctor');
+
+        const map = {
+            'Child and Maternal Health': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+            'Antenatal Care':            ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+            'Postnatal Care':            ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+            'Infant Immunization':       ['Dr. Chioma Nwosu', 'Dr. Oluwaseun Balogun'],
+            'Primary Health Care':       ['Dr. Emmanuel Okafor', 'Dr. Yusuf Mohammed'],
+            'Counselling':               ['Dr. Grace Okonkwo', 'Dr. Ahmed Hassan'],
+            'Health Education':          ['Dr. Yusuf Mohammed', 'Dr. Funke Adeyemi'],
+            'Medical Outreach':          ['Dr. Adebayo Johnson', 'Dr. Ibrahim Musa'],
+            'Home Care Services':        ['Dr. Emmanuel Okafor', 'Dr. Tunde Bakare'],
+            'Family Planning':           ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo']
+        };
+
+        sel.innerHTML = '<option value="Any Available Doctor">Any Available Doctor</option>';
+        if (map[dept]) {
+            map[dept].forEach(name => {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.textContent = name;
+                sel.appendChild(opt);
+            });
+        }
+    }
+
+    // ── Success modal ─────────────────────────────────────────
+    function closeSuccessModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+
+    // ── DOM ready ─────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('appointmentDate');
+        if (dateInput) {
+            dateInput.min = new Date().toISOString().split('T')[0];
+        }
+
+        // Phone: strip non-numeric, limit to 11 chars
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                this.value = this.value.replace(/\D/g, '').slice(0, 11);
+            });
+        }
+
+        // Form submission via hidden iframe
+        const form = document.getElementById('appointmentForm');
+        const submitBtn = document.getElementById('submitButton');
+        const iframe = document.querySelector('iframe[name="hiddenFrame"]');
+
+        form.addEventListener('submit', function (e) {
+            // Final validation on step 3
+            if (!validateStep(3)) {
+                e.preventDefault();
                 return;
             }
 
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
 
-            document.querySelectorAll('.progress-step').forEach((el, idx) => {
-                el.classList.toggle('active', idx < step);
-            });
+            // Listen for iframe load = form submitted successfully
+            function onIframeLoad() {
+                document.getElementById('successModal').style.display = 'flex';
+                form.reset();
+                updateDoctors(); // reset doctor list
+                goToStep(1);
 
-            currentStep = step;
-        }
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Appointment';
+                submitBtn.disabled = false;
 
-        function prevStep(step) {
-            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
-
-            document.querySelectorAll('.progress-step').forEach((el, idx) => {
-                el.classList.toggle('active', idx < step);
-            });
-
-            currentStep = step;
-        }
-
-        function updateDoctors() {
-            const dept = document.getElementById('department')?.value;
-            const select = document.getElementById('doctor');
-            if (!select) return;
-
-            const mapping = {
-                'Child and Maternal Health': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
-                'Antenatal Care': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
-                'Postnatal Care': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
-                'Infant Immunization': ['Dr. Chioma Nwosu', 'Dr. Oluwaseun Balogun'],
-                'Primary Health Care': ['Dr. Emmanuel Okafor', 'Dr. Yusuf Mohammed'],
-                'Counselling': ['Dr. Grace Okonkwo', 'Dr. Ahmed Hassan'],
-                'Health Education': ['Dr. Yusuf Mohammed', 'Dr. Funke Adeyemi'],
-                'Medical Outreach': ['Dr. Adebayo Johnson', 'Dr. Ibrahim Musa'],
-                'Home Care Services': ['Dr. Emmanuel Okafor', 'Dr. Tunde Bakare'],
-                'Family Planning': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo']
-            };
-
-            select.innerHTML = '<option value="">Any Available Doctor</option>';
-
-            if (mapping[dept]) {
-                mapping[dept].forEach(name => {
-                    const opt = document.createElement('option');
-                    opt.value = name;
-                    opt.textContent = name;
-                    select.appendChild(opt);
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set minimum date for appointment
-            const dateEl = document.getElementById('appointmentDate');
-            if (dateEl) {
-                dateEl.min = new Date().toISOString().split('T')[0];
+                iframe.removeEventListener('load', onIframeLoad);
             }
 
-            const form = document.getElementById('appointmentForm');
-            const submitBtn = document.getElementById('submitButton');
-            const iframe = document.querySelector('iframe[name="hiddenFrame"]');
-
-            if (!form || !submitBtn || !iframe) return;
-
-            form.addEventListener('submit', function (e) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Submitting...';
-
-                const onLoadHandler = () => {
-                    // Show success modal when iframe loads (Formspark submission completed)
-                    document.getElementById('successModal').style.display = 'flex';
-                    form.reset();
-
-                    // Reset form to step 1
-                    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-                    document.getElementById('step1').classList.add('active');
-                    document.querySelectorAll('.progress-step').forEach((el, idx) => {
-                        el.classList.toggle('active', idx === 0);
-                    });
-                    currentStep = 1;
-
-                    setTimeout(() => {
-                        submitBtn.textContent = 'Submit Appointment';
-                        submitBtn.disabled = false;
-                    }, 2500);
-
-                    iframe.removeEventListener('load', onLoadHandler);
-                };
-
-                iframe.addEventListener('load', onLoadHandler);
-            });
+            iframe.addEventListener('load', onIframeLoad);
         });
+    });
     </script>
 </body>
-
 </html>
