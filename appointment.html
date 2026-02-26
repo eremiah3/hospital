@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - T Elshadai Clinic and Maternity</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Success modal styles */
+        #successModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #successModal .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #successModal h2 {
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        #successModal button {
+            padding: 12px 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #successModal button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="../assets/logo.png" alt="T Elshadai Clinic and Maternity Logo"
+                        style="height: 40px; margin-right: 10px;">
+                    <span>T Elshadai Clinic</span>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="doctors.html">Our Doctors</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="appointment.html" class="btn-appointment active">Book Appointment</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="hero-image">
+            <img src="assets/appoint.jpg" alt="Medical Appointment">
+        </div>
+        <div class="container" id="container">
+            <h1>Book an Appointment</h1>
+            <p>Schedule your consultation with our expert doctors</p>
+        </div>
+    </section>
+
+    <!-- Appointment Methods -->
+    <section class="appointment-methods">
+        <div class="container">
+            <div class="section-header">
+                <h2>How to Book Your Appointment</h2>
+                <p>Choose your preferred method of booking</p>
+            </div>
+            <div class="methods-grid">
+                <div class="method-card active" id="onlineMethod">
+                    <i class="fas fa-laptop-medical"></i>
+                    <h3>Online Booking</h3>
+                    <p>Fill out our online form below</p>
+                </div>
+                <div class="method-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>08057427115</p>
+                    <p>08034269377</p>
+                    <a href="tel:08057427115" class="btn btn-sm btn-primary">Call Now</a>
+                    <a href="tel:08034269377" class="btn btn-sm btn-primary">Call Now</a>
+                </div>
+                <div class="method-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>08057427115</p>
+                    <a href="https://wa.me/2348057427115?text=Hello%2C%20I%20need%20medical%20aassistance%20from%20T%20Elshadai%20Clinic%20and%20Maternity."
+                        target="_blank" class="btn btn-primary btn-sm">Chat on WhatsApp</a>
+                </div>
+                <div class="method-card">
+                    <i class="fas fa-hospital"></i>
+                    <h3>Walk-In</h3>
+                    <p>Visit us at 148, Orimerunmu Road, Lulak Junction</p>
+                    <a href="contact.html" class="btn btn-sm btn-primary">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal">
+        <div class="modal-content">
+            <h2>Appointment Request Sent!</h2>
+            <p>Thank you for choosing T Elshadai Clinic.<br>We will review your request and contact you within 24 hours
+                to
+                confirm.</p>
+            <button onclick="document.getElementById('successModal').style.display='none'">Close</button>
+        </div>
+    </div>
+
+    <!-- Appointment Form Section -->
+    <section class="appointment-form-section">
+        <div class="container">
+            <div class="appointment-layout">
+                <div class="form-side">
+                    <div class="form-header">
+                        <h2>Schedule Your Appointment</h2>
+                        <p>Please fill in the details below. We'll confirm your appointment within 24 hours.</p>
+                    </div>
+
+                    <form id="appointmentForm" action="https://submit-form.com/tmu0nAdL8" method="POST">
+                        <!-- Formspark configuration - kept exactly as original -->
+                        <input type="hidden" name="_email.subject"
+                            value="New Appointment Request - T Elshadai Clinic and Maternity">
+                        <input type="hidden" name="_email.from" value="noreply@tolu.elshaddaihealthcare.com">
+                        <input type="hidden" name="_email.replyto" value="email">
+                        <input type="hidden" name="_redirect" value="about:blank">
+                        <input type="text" name="_gotcha" style="display:none;" />
+
+                        <div class="form-step active" id="step1">
+                            <h3>Personal Information</h3>
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="Full Name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="Email Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="Phone Number" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age *</label>
+                                    <input type="number" id="age" name="Age" min="0" max="150" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender *</label>
+                                    <select id="gender" name="Gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address *</label>
+                                <textarea id="address" name="Address" rows="2" required></textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
+                        </div>
+
+                        <div class="form-step" id="step2">
+                            <h3>Appointment Details</h3>
+                            <div class="form-group">
+                                <label for="department">Department/Service *</label>
+                                <select id="department" name="Department" required onchange="updateDoctors()">
+                                    <option value="">Select Department</option>
+                                    <option value="Child and Maternal Health">Child and Maternal Health</option>
+                                    <option value="Antenatal Care">Antenatal Care</option>
+                                    <option value="Postnatal Care">Postnatal Care</option>
+                                    <option value="Infant Immunization">Infant Immunization</option>
+                                    <option value="Primary Health Care">Primary Health Care</option>
+                                    <option value="Counselling">Counselling</option>
+                                    <option value="Health Education">Health Education</option>
+                                    <option value="Medical Outreach">Medical Outreach</option>
+                                    <option value="Home Care Services">Home Care Services</option>
+                                    <option value="Family Planning">Family Planning</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctor">Preferred Doctor *</label>
+                                <select id="doctor" name="Preferred Doctor" required>
+                                    <option value="">Any Available Doctor</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appointmentDate">Preferred Date *</label>
+                                    <input type="date" id="appointmentDate" name="Preferred Date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="appointmentTime">Preferred Time *</label>
+                                    <select id="appointmentTime" name="Preferred Time" required>
+                                        <option value="">Select Time</option>
+                                        <option value="08:00 AM">08:00 AM</option>
+                                        <option value="09:00 AM">09:00 AM</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="01:00 PM">01:00 PM</option>
+                                        <option value="02:00 PM">02:00 PM</option>
+                                        <option value="03:00 PM">03:00 PM</option>
+                                        <option value="04:00 PM">04:00 PM</option>
+                                        <option value="05:00 PM">05:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitType">Visit Type *</label>
+                                <select id="visitType" name="Visit Type" required>
+                                    <option value="">Select Visit Type</option>
+                                    <option value="First Time Visit">First Time Visit</option>
+                                    <option value="Follow-up Visit">Follow-up Visit</option>
+                                    <option value="Urgent Care">Urgent Care</option>
+                                    <option value="Routine Checkup">Routine Checkup</option>
+                                </select>
+                            </div>
+                            <div class="form-buttons">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(1)">Previous</button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step</button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" id="step3">
+                            <h3>Medical Information</h3>
+                            <div class="form-group">
+                                <label for="reasonVisit">Reason for Visit *</label>
+                                <textarea id="reasonVisit" name="Reason for Visit" rows="3" required
+                                    placeholder="Please describe your symptoms or reason for consultation"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="medicalHistory">Medical History</label>
+                                <textarea id="medicalHistory" name="Medical History" rows="3"
+                                    placeholder="Any chronic conditions, previous surgeries, or ongoing treatments"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="medications">Current Medications</label>
+                                <textarea id="medications" name="Current Medications" rows="2"
+                                    placeholder="List any medications you're currently taking"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="allergies">Allergies</label>
+                                <input type="text" id="allergies" name="Allergies"
+                                    placeholder="Any drug or food allergies">
+                            </div>
+                            <div class="form-group">
+                                <label for="insurance">Insurance Provider (if applicable)</label>
+                                <input type="text" id="insurance" name="Insurance Provider"
+                                    placeholder="Your insurance company name">
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="terms" name="Terms Accepted" value="Yes" required>
+                                <label for="terms">I agree to the hospital's terms and conditions and consent to the
+                                    collection of my medical information *</label>
+                            </div>
+                            <div class="form-buttons">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(2)">Previous</button>
+                                <button type="submit" class="btn btn-primary" id="submitButton">Submit
+                                    Appointment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="form-progress">
+                        <div class="progress-step active" data-step="1">
+                            <div class="progress-number">1</div>
+                            <span>Personal Info</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="2">
+                            <div class="progress-number">2</div>
+                            <span>Appointment</span>
+                        </div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step" data-step="3">
+                            <div class="progress-number">3</div>
+                            <span>Medical Info</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info side -->
+                <div class="info-side">
+                    <div class="info-card" style="margin-top: 30px;">
+                        <h3>Important Information</h3>
+                        <ul class="info-list">
+                            <li><i class="fas fa-check-circle"></i> Please arrive 15 minutes before your appointment
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> Bring your ID card and insurance card (if
+                                applicable)</li>
+                            <li><i class="fas fa-check-circle"></i> Bring any previous medical records or test results
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> We'll confirm your appointment within 24 hours</li>
+                            <li><i class="fas fa-check-circle"></i> Cancellations should be made 24 hours in advance
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Need Immediate Care?</h3>
+                        <p>If you're experiencing a medical emergency, please don't wait for an appointment.</p>
+                        <a href="tel:08057427115" class="btn btn-danger btn-block">
+                            <i class="fas fa-ambulance"></i> Call Emergency: 08057427115
+                        </a>
+                    </div>
+
+                </div>
+                <div class="info-card">
+                    <h3>Contact Appointments Desk</h3>
+                    <div class="contact-options">
+                        <a href="tel:08057427115" class="contact-option">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Call</strong>
+                                <span>08057427115, 08034269377</span>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/2348057427115" class="contact-option" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <span>08057427115</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="info-card">
+                <h3>Available Hours</h3>
+                <div class="hours-simple">
+                    <p><strong>Available 24/7</strong></p>
+                    <p>We are always here for you, round the clock.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>T Elshadai Clinic and Maternity</h3>
+                    <p>Providing quality healthcare services since 2015. Your health and wellbeing are our top
+                        priorities.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Our Doctors</a></li>
+                        <li><a href="appointment.html">Appointments</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Emergency Care</a></li>
+                        <li><a href="services.html">Cardiology</a></li>
+                        <li><a href="services.html">Pediatrics</a></li>
+                        <li><a href="services.html">Surgery</a></li>
+                        <li><a href="services.html">Laboratory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 148, Orimerunmu Road, Lulak Junction, Papa Jabutu,
+                            Obafemi-Owode LGA, Ogun State</li>
+                        <li><i class="fas fa-phone"></i> 08057427115, 08034269377</li>
+                        <li><i class="fab fa-whatsapp"></i> 08057427115</li>
+                        <li><i class="fas fa-clock"></i> Available 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 T Elshadai Clinic and Maternity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ────────────────────────────────────────
+        // FORM LOGIC ─ only touching form-related code
+        // ────────────────────────────────────────
+        let currentStep = 1;
+
+        function nextStep(step) {
+            const current = document.getElementById('step' + currentStep);
+            const requiredFields = current.querySelectorAll('[required]');
+            let valid = true;
+
+            requiredFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!field.checked) valid = false;
+                } else if (!field.value.trim()) {
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                alert("Please complete all required fields before continuing.");
+                return;
+            }
+
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            document.querySelectorAll('.progress-step').forEach((el, idx) => {
+                el.classList.toggle('active', idx < step);
+            });
+
+            currentStep = step;
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            document.querySelectorAll('.progress-step').forEach((el, idx) => {
+                el.classList.toggle('active', idx < step);
+            });
+
+            currentStep = step;
+        }
+
+        function updateDoctors() {
+            const dept = document.getElementById('department')?.value;
+            const select = document.getElementById('doctor');
+            if (!select) return;
+
+            const mapping = {
+                'Child and Maternal Health': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+                'Antenatal Care': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+                'Postnatal Care': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo'],
+                'Infant Immunization': ['Dr. Chioma Nwosu', 'Dr. Oluwaseun Balogun'],
+                'Primary Health Care': ['Dr. Emmanuel Okafor', 'Dr. Yusuf Mohammed'],
+                'Counselling': ['Dr. Grace Okonkwo', 'Dr. Ahmed Hassan'],
+                'Health Education': ['Dr. Yusuf Mohammed', 'Dr. Funke Adeyemi'],
+                'Medical Outreach': ['Dr. Adebayo Johnson', 'Dr. Ibrahim Musa'],
+                'Home Care Services': ['Dr. Emmanuel Okafor', 'Dr. Tunde Bakare'],
+                'Family Planning': ['Dr. Chioma Nwosu', 'Dr. Grace Okonkwo']
+            };
+
+            select.innerHTML = '<option value="">Any Available Doctor</option>';
+
+            if (mapping[dept]) {
+                mapping[dept].forEach(name => {
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.textContent = name;
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // min date - kept as is
+            const dateEl = document.getElementById('appointmentDate');
+            if (dateEl) {
+                dateEl.min = new Date().toISOString().split('T')[0];
+            }
+
+            const form = document.getElementById('appointmentForm');
+            const submitBtn = document.getElementById('submitButton');
+
+            if (!form || !submitBtn) return;
+
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+
+                try {
+                    const data = Object.fromEntries(new FormData(form));
+
+                    const resp = await fetch('https://submit-form.com/tmu0nAdL8', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (resp.ok) {
+                        document.getElementById('successModal').style.display = 'flex';
+                        form.reset();
+                        // reset to step 1
+                        document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+                        document.getElementById('step1').classList.add('active');
+                        document.querySelectorAll('.progress-step').forEach((el, i) => {
+                            el.classList.toggle('active', i === 0);
+                        });
+                        currentStep = 1;
+                    } else {
+                        alert('Submission failed. Please try again or call us.');
+                    }
+                } catch (err) {
+                    alert('Connection problem. Please call 08057427115.');
+                    console.error(err);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Appointment';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

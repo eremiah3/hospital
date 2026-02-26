@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - T Elshadai Clinic and Maternity</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <!-- <div id="preloader">
+        <div class="loader">
+            <i class="fas fa-heartbeat"></i>
+            <p>Loading...</p>
+        </div>
+    </div> -->
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="../assets/logo.png" alt="T Elshadai Clinic and Maternity Logo"
+                        style="height: 40px; margin-right: 10px;">
+                    <span>T Elshadai Clinic</span>
+                </div>
+
+                <!-- <div class="emergency-hotline">
+                    <i class="fas fa-phone-volume"></i>
+                    <div class="hotline-info">
+                        <span class="hotline-label">Emergency</span>
+                        <span class="hotline-number">+234-911-0000</span>
+                    </div>
+                </div> -->
+
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="doctors.html">Our Doctors</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="appointment.html" class="btn-appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="hero-image">
+            <img src="assets/gall.png" alt="Hospital Gallery">
+        </div>
+        <div class="container" id="container">
+            <h1>Photo Gallery</h1>
+            <p>Explore our state-of-the-art facilities and healthcare environment</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter-section">
+        <div class="container">
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="building">Building & Exterior</button>
+                <button class="filter-btn" data-filter="reception">Reception & Lobby</button>
+                <button class="filter-btn" data-filter="wards">Patient Wards</button>
+                <button class="filter-btn" data-filter="laboratory">Laboratory</button>
+                <button class="filter-btn" data-filter="surgery">Operating Theaters</button>
+                <button class="filter-btn" data-filter="emergency">Emergency Department</button>
+                <button class="filter-btn" data-filter="equipment">Medical Equipment</button>
+                <button class="filter-btn" data-filter="staff">Our Team</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+        <div class="container">
+
+            <!-- Building & Exterior -->
+            <div class="gallery-category">
+                <h2 class="category-title">Building & Exterior</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="building">
+                        <img src="assets/im.jfif" alt="Hospital Main Building">
+                        <div class="photo-overlay">
+                            <h3>Main Hospital Building</h3>
+                            <p>Modern 5-story healthcare facility</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="building">
+                        <img src="https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?w=600"
+                            alt="Hospital Entrance">
+                        <div class="photo-overlay">
+                            <h3>Main Entrance</h3>
+                            <p>Welcoming and accessible entrance with parking</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="building">
+                        <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600"
+                            alt="Hospital Exterior Night">
+                        <div class="photo-overlay">
+                            <h3>Hospital at Night</h3>
+                            <p>24/7 healthcare services available</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="building">
+                        <img src="https://images.unsplash.com/photo-1598257006458-087169a1f08d?w=600"
+                            alt="Hospital Garden">
+                        <div class="photo-overlay">
+                            <h3>Healing Garden</h3>
+                            <p>Peaceful outdoor space for patients and visitors</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reception & Lobby -->
+            <div class="gallery-category">
+                <h2 class="category-title">Reception & Lobby</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="reception">
+                        <img src="../assets/Reception.jfif" alt="Main Reception">
+                        <div class="photo-overlay">
+                            <h3>Main Reception</h3>
+                            <p>Friendly staff ready to assist you</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="reception">
+                        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600"
+                            alt="Main Reception">
+                        <div class="photo-overlay">
+                            <h3>Main Reception Desk</h3>
+                            <p>Friendly staff ready to assist you</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="reception">
+                        <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?w=600"
+                            alt="Waiting Area">
+                        <div class="photo-overlay">
+                            <h3>Waiting Lounge</h3>
+                            <p>Comfortable seating for patients and visitors</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="reception">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600"
+                            alt="Information Desk">
+                        <div class="photo-overlay">
+                            <h3>Information Center</h3>
+                            <p>Get directions and assistance</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="reception">
+                        <img src="https://images.unsplash.com/photo-1599493758267-c6c884c7071f?w=600"
+                            alt="Pharmacy Area">
+                        <div class="photo-overlay">
+                            <h3>In-House Pharmacy</h3>
+                            <p>Convenient prescription services</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Wards -->
+            <div class="gallery-category">
+                <h2 class="category-title">Patient Wards & Rooms</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="wards">
+                        <img src="../assets/Postnatal ward.jfif" alt="Postnatal Ward">
+                        <div class="photo-overlay">
+                            <h3>Postnatal Ward</h3>
+                            <p>Comfortable and well-equipped rooms for mothers</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600"
+                            alt="Private Ward">
+                        <div class="photo-overlay">
+                            <h3>Private Patient Room</h3>
+                            <p>Comfortable and well-equipped private rooms</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600"
+                            alt="General Ward">
+                        <div class="photo-overlay">
+                            <h3>General Ward</h3>
+                            <p>Clean and spacious patient care areas</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600" alt="ICU">
+                        <div class="photo-overlay">
+                            <h3>Intensive Care Unit</h3>
+                            <p>Advanced critical care facilities</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=600"
+                            alt="Pediatric Ward">
+                        <div class="photo-overlay">
+                            <h3>Pediatric Ward</h3>
+                            <p>Child-friendly environment with colorful decor</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?w=600"
+                            alt="Maternity Ward">
+                        <div class="photo-overlay">
+                            <h3>Maternity Suite</h3>
+                            <p>Comfortable birthing and recovery rooms</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="wards">
+                        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600"
+                            alt="Nurses Station">
+                        <div class="photo-overlay">
+                            <h3>Nurses Station</h3>
+                            <p>24/7 nursing care and monitoring</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Laboratory -->
+            <div class="gallery-category">
+                <h2 class="category-title">Diagnostic Laboratory</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="laboratory">
+                        <img src="../assets/consulting room.jfif" alt="Consulting Room">
+                        <div class="photo-overlay">
+                            <h3>Consulting Room</h3>
+                            <p>Private consultation rooms for patients</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="laboratory">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600"
+                            alt="Main Laboratory">
+                        <div class="photo-overlay">
+                            <h3>Main Laboratory</h3>
+                            <p>Fully equipped diagnostic lab</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="laboratory">
+                        <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?w=600"
+                            alt="Lab Equipment">
+                        <div class="photo-overlay">
+                            <h3>Advanced Lab Equipment</h3>
+                            <p>State-of-the-art testing machines</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="laboratory">
+                        <img src="https://images.unsplash.com/photo-1583911860205-72f8ac8ddcbe?w=600"
+                            alt="Lab Technicians">
+                        <div class="photo-overlay">
+                            <h3>Lab Technicians at Work</h3>
+                            <p>Experienced professionals ensuring accuracy</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="laboratory">
+                        <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600" alt="Blood Bank">
+                        <div class="photo-overlay">
+                            <h3>Blood Bank</h3>
+                            <p>Safe storage and transfusion services</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operating Theaters -->
+            <div class="gallery-category">
+                <h2 class="category-title">Operating Theaters</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="surgery">
+                        <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600"
+                            alt="Operating Theater">
+                        <div class="photo-overlay">
+                            <h3>Main Operating Theater</h3>
+                            <p>Advanced surgical suite with modern equipment</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="surgery">
+                        <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=600"
+                            alt="Surgical Equipment">
+                        <div class="photo-overlay">
+                            <h3>Surgical Instruments</h3>
+                            <p>Sterile and state-of-the-art tools</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="surgery">
+                        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=600" alt="Recovery Room">
+                        <div class="photo-overlay">
+                            <h3>Post-Operative Recovery</h3>
+                            <p>Comfortable recovery area with monitoring</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="surgery">
+                        <img src="https://images.unsplash.com/photo-1626315869435-37698ab48446?w=600"
+                            alt="Surgical Team">
+                        <div class="photo-overlay">
+                            <h3>Surgical Team Preparation</h3>
+                            <p>Expert surgeons and nurses ready for procedures</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Department -->
+            <div class="gallery-category">
+                <h2 class="category-title">Emergency Department</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="emergency">
+                        <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600"
+                            alt="Emergency Room">
+                        <div class="photo-overlay">
+                            <h3>Emergency Room</h3>
+                            <p>24/7 emergency medical services</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="emergency">
+                        <img src="https://images.unsplash.com/photo-1624947925212-fb29daf5ffee?w=600" alt="Ambulance">
+                        <div class="photo-overlay">
+                            <h3>Ambulance Fleet</h3>
+                            <p>Fully equipped emergency vehicles</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="emergency">
+                        <img src="https://images.unsplash.com/photo-1632831812770-9f394a72e6b3?w=600" alt="Trauma Bay">
+                        <div class="photo-overlay">
+                            <h3>Trauma Bay</h3>
+                            <p>Rapid response for critical cases</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="emergency">
+                        <img src="https://images.unsplash.com/photo-1583911860205-72f8ac8ddcbe?w=600"
+                            alt="Emergency Staff">
+                        <div class="photo-overlay">
+                            <h3>Emergency Medical Team</h3>
+                            <p>Experienced emergency physicians and nurses</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medical Equipment -->
+            <div class="gallery-category">
+                <h2 class="category-title">Medical Equipment & Technology</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=600" alt="MRI Machine">
+                        <div class="photo-overlay">
+                            <h3>MRI Scanner</h3>
+                            <p>Advanced imaging technology</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=600" alt="CT Scan">
+                        <div class="photo-overlay">
+                            <h3>CT Scan Machine</h3>
+                            <p>High-resolution diagnostic imaging</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=600" alt="Ultrasound">
+                        <div class="photo-overlay">
+                            <h3>Ultrasound Equipment</h3>
+                            <p>Modern diagnostic ultrasound systems</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=600"
+                            alt="X-Ray Machine">
+                        <div class="photo-overlay">
+                            <h3>Digital X-Ray</h3>
+                            <p>Fast and accurate radiography</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600"
+                            alt="Patient Monitoring">
+                        <div class="photo-overlay">
+                            <h3>Patient Monitoring Systems</h3>
+                            <p>Real-time vital signs tracking</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="equipment">
+                        <img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=600" alt="Dialysis">
+                        <div class="photo-overlay">
+                            <h3>Dialysis Unit</h3>
+                            <p>Renal care and treatment facilities</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Team -->
+            <div class="gallery-category">
+                <h2 class="category-title">Our Dedicated Team</h2>
+                <div class="photo-grid">
+                    <div class="photo-item" data-category="staff">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600"
+                            alt="Medical Team">
+                        <div class="photo-overlay">
+                            <h3>Our Medical Team</h3>
+                            <p>Experienced doctors and specialists</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="staff">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600"
+                            alt="Nursing Staff">
+                        <div class="photo-overlay">
+                            <h3>Nursing Staff</h3>
+                            <p>Compassionate and skilled nurses</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="staff">
+                        <img src="https://images.unsplash.com/photo-1583911860205-72f8ac8ddcbe?w=600"
+                            alt="Support Staff">
+                        <div class="photo-overlay">
+                            <h3>Support Staff</h3>
+                            <p>Dedicated administrative and support team</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                    <div class="photo-item" data-category="staff">
+                        <img src="https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=600"
+                            alt="Team Meeting">
+                        <div class="photo-overlay">
+                            <h3>Medical Team Conference</h3>
+                            <p>Collaborative approach to patient care</p>
+                            <button class="view-btn" onclick="openModal(this)"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal for Enlarged Image -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+            <div class="modal-caption">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+        <button class="modal-nav modal-prev" onclick="navigateModal(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav modal-next" onclick="navigateModal(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Experience Our World-Class Facilities</h2>
+                <p>Schedule a visit or book your appointment today</p>
+                <div class="cta-buttons">
+                    <a href="appointment.html" class="btn btn-light">Book Appointment</a>
+                    <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>T Elshadai Clinic and Maternity</h3>
+                    <p>Providing quality healthcare services since 2015. Your health and wellbeing are our top
+                        priorities.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Our Doctors</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="appointment.html">Appointments</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Emergency Care</a></li>
+                        <li><a href="services.html">Cardiology</a></li>
+                        <li><a href="services.html">Pediatrics</a></li>
+                        <li><a href="services.html">Surgery</a></li>
+                        <li><a href="services.html">Laboratory</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 148, Orimerunmu Road, Lulak Junction, Papa Jabutu,
+                            Obafemi-Owode LGA, Ogun State</li>
+                        <li><i class="fas fa-phone"></i> 08057427115, 08034269377</li>
+                        <li><i class="fab fa-whatsapp"></i> 08057427115</li>
+                        <li><i class="fas fa-clock"></i> Available 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 T Elshadai Clinic and Maternity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Gallery Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryCategories = document.querySelectorAll('.gallery-category');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const filter = this.getAttribute('data-filter');
+
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter categories
+                galleryCategories.forEach(category => {
+                    const categoryPhotos = category.querySelectorAll('.photo-item');
+                    let hasVisiblePhotos = false;
+
+                    categoryPhotos.forEach(photo => {
+                        if (filter === 'all' || photo.getAttribute('data-category') === filter) {
+                            photo.style.display = 'block';
+                            hasVisiblePhotos = true;
+                        } else {
+                            photo.style.display = 'none';
+                        }
+                    });
+
+                    // Hide category title if no photos are visible
+                    if (hasVisiblePhotos) {
+                        category.style.display = 'block';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal Functionality
+        let currentImageIndex = 0;
+        let allImages = [];
+
+        function openModal(button) {
+            const modal = document.getElementById('imageModal');
+            const photoItem = button.closest('.photo-item');
+            const img = photoItem.querySelector('img');
+            const overlay = photoItem.querySelector('.photo-overlay');
+            const title = overlay.querySelector('h3').textContent;
+            const description = overlay.querySelector('p').textContent;
+
+            // Get all visible images
+            allImages = Array.from(document.querySelectorAll('.photo-item')).filter(item => {
+                return item.style.display !== 'none';
+            });
+
+            currentImageIndex = allImages.indexOf(photoItem);
+
+            document.getElementById('modalImage').src = img.src;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateModal(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = allImages.length - 1;
+            } else if (currentImageIndex >= allImages.length) {
+                currentImageIndex = 0;
+            }
+
+            const photoItem = allImages[currentImageIndex];
+            const img = photoItem.querySelector('img');
+            const overlay = photoItem.querySelector('.photo-overlay');
+            const title = overlay.querySelector('h3').textContent;
+            const description = overlay.querySelector('p').textContent;
+
+            document.getElementById('modalImage').src = img.src;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+        }
+
+        // Close modal on outside click
+        window.onclick = function (event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateModal(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateModal(1);
+                }
+            }
+        });
